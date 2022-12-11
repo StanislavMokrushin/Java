@@ -1,5 +1,6 @@
 package com.example.springsecurityapplication.controllers;
 
+import com.example.springsecurityapplication.enumm.Status;
 import com.example.springsecurityapplication.models.Image;
 import com.example.springsecurityapplication.models.Order;
 import com.example.springsecurityapplication.models.Person;
@@ -268,34 +269,61 @@ public class AdminController {
     }
 
 // возвращает страницу с заказами
+//    @GetMapping("/orders")
+//    public String order(Model model){
+////        List<Order> orderList = orderRepository.findAll();
+////        model.addAttribute("orders", orderList);
+//        model.addAttribute("orders", orderService.getAllOrder());
+//        return "/orders";
+//    }
+//
+//
+//// страница с подробной инфо о заказе
+//    @GetMapping("order/edit/{id}")
+//    public String editOrder(@PathVariable("id") int id, Model model){
+//        model.addAttribute("editOrder", orderService.getOrderId(id));
+//        return "admin/editOrder";
+//    }
+////редактирование заказа
+//    @PostMapping ("order/edit/{id}")
+//    public String editOrder(@ModelAttribute("editOrder") Order order, @PathVariable("id") int id){
+//        orderService.updateOrder(id, order);
+//        return "redirect:/admin/orders";
+//    }
+//
+//    @GetMapping("order/delete/{id}")
+//    public String deleteOrder(@PathVariable("id") int id){
+//           orderService.deleteOrder(id);
+//           return "redirect:/admin/orders";
+//        }
+
     @GetMapping("/orders")
-    public String order(Model model){
-//        List<Order> orderList = orderRepository.findAll();
-//        model.addAttribute("orders", orderList);
-        model.addAttribute("orders", orderService.getAllOrder());
-        return "/orders";
+    public String order(Model model){;
+        model.addAttribute("orders", orderService.getAllOrders());
+        return "admin/orders";
     }
 
-
-// страница с подробной инфо о заказе
-    @GetMapping("order/edit/{id}")
-    public String editOrder(@PathVariable("id") int id, Model model){
-        model.addAttribute("editOrder", orderService.getOrderId(id));
-        return "admin/editOrder";
+    //   Метод возвращает страницу с формой редактирования заказ и помещает в модель объект редактируемого заказа по id
+    @GetMapping("/orders/{id}")
+    public String editOrder(@PathVariable("id")int id, Model model){
+        model.addAttribute("info_order", orderService.getOrderById(id));
+        return "/admin/infoOrder";
     }
-//редактирование заказа
-    @PostMapping ("order/edit/{id}")
-    public String editOrder(@ModelAttribute("editOrder") Order order, @PathVariable("id") int id){
-        orderService.updateOrder(id, order);
+    //
+    // Метод принимает объект с формы и обновляет заказы
+    @PostMapping("/orders/{id}")
+    public String changeStatus(@PathVariable("id") int id, @RequestParam("status") Status status){
+        Order order_status=orderService.getOrderById(id);
+        order_status.setStatus(status);
+        orderService.updateOrderStatus(order_status);
         return "redirect:/admin/orders";
     }
 
-    @GetMapping("order/delete/{id}")
-    public String deleteOrder(@PathVariable("id") int id){
-           orderService.deleteOrder(id);
-           return "redirect:/admin/orders";
-        }
-
-
+    // Поиск по последним сомволам номера заказа
+    @PostMapping("/orders/search")
+    public String searchOrderByLastSymbols(@RequestParam("value") String value, Model model) {
+        model.addAttribute("search_order",orderRepository.findByNumberEndingWith(value));
+        return "/admin/orders";
+    }
 
 }

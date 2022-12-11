@@ -16,5 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByPerson(Person person);
 //    List<Order> findAll();
 
-    List<Order> findByNumberContainingIgnoreCase(String name);
+//    List<Order> findByNumberContainingIgnoreCase(String name);
+    List<Order> findByNumberEndingWith(String endingWith);
+
 }
