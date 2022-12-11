@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заказов</title>
+</head>
+<body>
+<h3>Список заказов: </h3>
+<div th:each="order : ${orders}">
+    <a th:href="@{admin/order/edit/{id}(id=${editOrder.getId()})}" th:text="Поменять статус заказа" id="edit"></a>
+    <p th:text="'Номер заказа: ' + ${order.getNumber()}"></p>
+</div>
+</body>
+</html>
