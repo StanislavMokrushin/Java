@@ -5,7 +5,7 @@
 -- Dumped from database version 15.1
 -- Dumped by pg_dump version 15.1
 
--- Started on 2022-12-12 00:10:04 +07
+-- Started on 2022-12-12 15:55:17 +07
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -277,13 +277,16 @@ INSERT INTO public.image (id, file_name, product_id) VALUES (45, 'dfdb1c6a-a144-
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (3, 1, '2022-12-10 16:07:29.785391', '201e2b75-87fc-4dbb-b05c-f3a863a8ff72', 84990, 1, 2, 1);
 INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (4, 1, '2022-12-11 12:10:27.331091', '73b2f766-c8be-4b1e-bc6f-46b55c58193d', 62990, 1, 2, 3);
 INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (6, 1, '2022-12-11 23:06:46.256872', '19f40a23-cfc2-4ff0-8fed-8a17192dd110', 84990, 3, 2, 1);
 INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (5, 1, '2022-12-11 16:40:47.258163', '6c34cad1-9878-427d-a9de-f8f52e97867e', 25990, 3, 2, 4);
 INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (1, 1, '2022-12-10 16:01:26.47707', '921fa9ff-5d59-4903-885f-015c317a9fcf', 146990, 4, 2, 2);
 INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (2, 1, '2022-12-10 16:02:53.969184', '6d0dbc2f-f0ef-4821-9260-12d3d2c6ac0f', 146990, 4, 2, 2);
 INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (8, 1, '2022-12-12 00:01:25.427246', 'de718120-bc35-44da-9662-90d45aebe323', 62990, 1, 2, 3);
+INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (9, 1, '2022-12-12 03:11:12.109736', 'c8f85b00-8c57-4e45-a89a-859915bcac99', 84990, 1, 5, 1);
+INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (10, 1, '2022-12-12 15:13:22.203055', 'e459c744-1657-40b0-9279-5c4b450fde37', 84990, 1, 2, 1);
+INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (3, 1, '2022-12-10 16:07:29.785391', '201e2b75-87fc-4dbb-b05c-f3a863a8ff72', 84990, 3, 2, 1);
+INSERT INTO public.orders (id, count, date_time, number, price, status, person_id, product_id) VALUES (11, 1, '2022-12-12 15:42:22.451481', '30794db9-e83a-4ac7-9a07-5f21ef045b77', 59990, 1, 5, 6);
 
 
 --
@@ -292,10 +295,12 @@ INSERT INTO public.orders (id, count, date_time, number, price, status, person_i
 -- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.person (id, login, password, role) VALUES (2, 'user_test', '$2a$10$JYLFDOmcVYsnmM1QVaNqhO3Yo7jTBXfSsBWdKMCoZwP5M.Zl4Q4sy', 'ROLE_USER');
-INSERT INTO public.person (id, login, password, role) VALUES (3, 'admin', '$2a$10$FnPTSW7kUmwlWC/3Vm3hg.cyYO4DwpSTpKgav3aVlwJcj37cav83q', 'ROLE_ADMIN');
 INSERT INTO public.person (id, login, password, role) VALUES (4, 'MSI777', '$2a$10$1FTSK4pKB1KGhafkrQ91der58V1lhp3WOvl3pvLc1NUVOdpM5ZAq6', 'ROLE_ADMIN');
 INSERT INTO public.person (id, login, password, role) VALUES (1, 'le.msi.group@gmail.com', '$2a$10$fc3Ij7EupIiukpZZXdTodeP/znHCKiLkVCBankBqYqmxQEQsTns5G', 'ROLE_ADMIN');
+INSERT INTO public.person (id, login, password, role) VALUES (2, 'user_test', '$2a$10$dCRFV3e7sJj5k5pa8ALAO.23U7k.rQE/e7kpIuZEl7OcloH5hVsA2', 'ROLE_USER');
+INSERT INTO public.person (id, login, password, role) VALUES (5, 'user2', '$2a$10$xzSUozYH6/V8trIxUONPbOLNfYH7gjy01P/Aa2aVTRvElOirvk2MK', 'ROLE_USER');
+INSERT INTO public.person (id, login, password, role) VALUES (3, 'admin', '$2a$10$FnPTSW7kUmwlWC/3Vm3hg.cyYO4DwpSTpKgav3aVlwJcj37cav83q', 'ROLE_SELLER');
+INSERT INTO public.person (id, login, password, role) VALUES (6, 'TestUser', '$2a$10$eLxuQ.tR82VxRvY1m3SkpOjtJu.YtsUhJOlhNM.ibTKjm8.d/bwMW', 'ROLE_USER');
 
 
 --
@@ -347,7 +352,7 @@ SELECT pg_catalog.setval('public.image_id_seq', 45, true);
 -- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.orders_id_seq', 8, true);
+SELECT pg_catalog.setval('public.orders_id_seq', 11, true);
 
 
 --
@@ -356,7 +361,7 @@ SELECT pg_catalog.setval('public.orders_id_seq', 8, true);
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.person_id_seq', 4, true);
+SELECT pg_catalog.setval('public.person_id_seq', 6, true);
 
 
 --
@@ -365,7 +370,7 @@ SELECT pg_catalog.setval('public.person_id_seq', 4, true);
 -- Name: product_cart_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.product_cart_id_seq', 12, true);
+SELECT pg_catalog.setval('public.product_cart_id_seq', 17, true);
 
 
 --
@@ -494,7 +499,7 @@ ALTER TABLE ONLY public.product_cart
     ADD CONSTRAINT fksgnkc1ko2i1o9yr2p63ysq3rn FOREIGN KEY (person_id) REFERENCES public.person(id);
 
 
--- Completed on 2022-12-12 00:10:04 +07
+-- Completed on 2022-12-12 15:55:17 +07
 
 --
 -- PostgreSQL database dump complete

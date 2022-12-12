@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Редактирование статуса</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</head>
+<body style="background: #e7aa2c; margin: 30px">
+<div style="max-width: 600px">
+<form th:method="POST" th:action="@{/admin/orders/{id}(id=${info_order.getId()})}" th:object="${info_order}">
+
+  <div th:each="order:${info_order}">
+    <p th:text="${info_order.getNumber()}"></p>
+    <p th:text="${info_order.getStatus()}"></p>
+
+    <label for="status" >Выберите статус: </label>
+    <select id="status" name="status">
+      <option th:each="state : ${T(com.example.springsecurityapplication.enumm.Status).values()}"
+              th:value="${state}" th:text="${state}"></option>
+    </select>
+    <button type="submit">Редактировать</button>
+    <p th:text="${info_order.getProduct().getTitle()}"></p>
+  </div>
+
+</form>
+</div>
+</body>
+</html>
